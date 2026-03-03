@@ -305,8 +305,8 @@
                 mission.timeLeft--;
                 mission.vars.oxygene = Math.max(0, mission.vars.oxygene - 1);
                 updateMissionDisplay();
-                if (mission.vars.oxygene <= 0) endMission(false, "Plus d'oxygène ! 💨");
-                else if (mission.timeLeft <= 0) endMission(false, "Temps écoulé ! ⏰");
+                if (mission.vars.oxygene <= 0) endMission(false, `Plus d'oxygène ! 💨`);
+                else if (mission.timeLeft <= 0) endMission(false, `Temps écoulé ! ⏰`);
             }, 1000);
         }
 
@@ -316,27 +316,27 @@
             let message = '';
             switch(action) {
                 case 'avancer':
-                    if (mission.vars.carburant >= 10) { mission.vars.carburant -= 10; mission.distance += 10; message = '<span style="color:#00ff88;">🚀 +10 distance</span>'; if (mission.distance >= 100) endMission(true); }
-                    else message = '<span style="color:#ff0055;">❌ Pas assez de carburant !</span>'; break;
+                    if (mission.vars.carburant >= 10) { mission.vars.carburant -= 10; mission.distance += 10; message = `<span style="color:#00ff88;">🚀 +10 distance</span>`; if (mission.distance >= 100) endMission(true); }
+                    else message = `<span style="color:#ff0055;">❌ Pas assez de carburant !</span>`; break;
                 case 'scanner':
-                    if (mission.vars.energie >= 5) { mission.vars.energie -= 5; mission.vars.credits += 10; message = '<span style="color:#00f5ff;">🔍 +10 crédits</span>'; }
-                    else message = '<span style="color:#ff0055;">❌ Pas assez d'énergie !</span>'; break;
+                    if (mission.vars.energie >= 5) { mission.vars.energie -= 5; mission.vars.credits += 10; message = `<span style="color:#00f5ff;">🔍 +10 crédits</span>`; }
+                    else message = `<span style="color:#ff0055;">❌ Pas assez d'énergie !</span>`; break;
                 case 'collecter':
-                    if (mission.vars.energie >= 3) { mission.vars.energie -= 3; mission.vars.credits += 20; message = '<span style="color:#FFD700;">💎 +20 crédits</span>'; }
-                    else message = '<span style="color:#ff0055;">❌ Pas assez d'énergie !</span>'; break;
+                    if (mission.vars.energie >= 3) { mission.vars.energie -= 3; mission.vars.credits += 20; message = `<span style="color:#FFD700;">💎 +20 crédits</span>`; }
+                    else message = `<span style="color:#ff0055;">❌ Pas assez d'énergie !</span>`; break;
                 case 'recharger':
-                    if (mission.vars.credits >= 30) { mission.vars.credits -= 30; mission.vars.energie = Math.min(100, mission.vars.energie + 50); mission.vars.carburant = Math.min(100, mission.vars.carburant + 30); message = '<span style="color:#00ff88;">🔋 Rechargé !</span>'; }
-                    else message = '<span style="color:#ff0055;">❌ Pas assez de crédits !</span>'; break;
+                    if (mission.vars.credits >= 30) { mission.vars.credits -= 30; mission.vars.energie = Math.min(100, mission.vars.energie + 50); mission.vars.carburant = Math.min(100, mission.vars.carburant + 30); message = `<span style="color:#00ff88;">🔋 Rechargé !</span>`; }
+                    else message = `<span style="color:#ff0055;">❌ Pas assez de crédits !</span>`; break;
                 case 'boost':
-                    if (mission.vars.energie >= 20 && mission.vars.carburant >= 15) { mission.vars.energie -= 20; mission.vars.carburant -= 15; mission.distance += 20; message = '<span style="color:#ff00ff;">⚡ TURBO ! +20 distance</span>'; if (mission.distance >= 100) endMission(true); }
-                    else message = '<span style="color:#ff0055;">❌ Ressources insuffisantes !</span>'; break;
+                    if (mission.vars.energie >= 20 && mission.vars.carburant >= 15) { mission.vars.energie -= 20; mission.vars.carburant -= 15; mission.distance += 20; message = `<span style="color:#ff00ff;">⚡ TURBO ! +20 distance</span>`; if (mission.distance >= 100) endMission(true); }
+                    else message = `<span style="color:#ff0055;">❌ Ressources insuffisantes !</span>`; break;
                 case 'repos':
-                    mission.vars.oxygene = Math.min(100, mission.vars.oxygene + 20); message = '<span style="color:#00f5ff;">😴 +20 oxygène</span>'; break;
+                    mission.vars.oxygene = Math.min(100, mission.vars.oxygene + 20); message = `<span style="color:#00f5ff;">😴 +20 oxygène</span>`; break;
             }
             feedback.innerHTML = message;
             setTimeout(() => { feedback.innerHTML = ''; }, 2000);
             updateMissionDisplay();
-            if (mission.vars.energie <= 0) endMission(false, "Plus d'énergie ! ⚡");
+            if (mission.vars.energie <= 0) endMission(false, `Plus d'énergie ! ⚡`);
         }
 
         function updateMissionDisplay() {
@@ -357,7 +357,7 @@
                 document.getElementById('finalTime').textContent = 60 - mission.timeLeft;
                 const t = 60 - mission.timeLeft;
                 const rank = t <= 20 ? '🏆 EXPLORATEUR LÉGENDAIRE 🏆' : t <= 35 ? '⭐ PILOTE EXPERT ⭐' : t <= 50 ? '🎖️ VOYAGEUR COMPÉTENT 🎖️' : '💪 SURVIVANT 💪';
-                document.getElementById('missionRank').innerHTML = '<span style="color:#00f5ff;">' + rank + '</span>';
+                document.getElementById('missionRank').innerHTML = `<span style="color:#00f5ff;">${rank}</span>`;
             } else {
                 document.getElementById('missionLose').style.display = 'block';
                 document.getElementById('loseReason').textContent = reason;
@@ -410,20 +410,20 @@
                 counter.textContent = i + ' / ' + count;
                 switch(loopGame.selectedAction) {
                     case 'sauter': robot.style.transform = 'translateY(-50px) scale(1.2)'; break;
-                    case 'tourner': robot.style.transform = 'rotate(' + (i*90) + 'deg)'; break;
+                    case 'tourner': robot.style.transform = `rotate(${i*90}deg)`; break;
                     case 'collecter': robot.textContent = i%2===0?'🤖':'💎'; robot.style.transform = 'scale(1.3)'; break;
-                    case 'danser': robot.textContent = i%2===0?'🕺':'💃'; robot.style.transform = 'rotate(' + (i%2===0?-15:15) + 'deg) scale(1.2)'; break;
+                    case 'danser': robot.textContent = i%2===0?'🕺':'💃'; robot.style.transform = `rotate(${i%2===0?-15:15}deg) scale(1.2)`; break;
                 }
                 await sleep(400); robot.style.transform = 'scale(1) rotate(0deg)'; robot.textContent = '🤖'; await sleep(200);
             }
             counter.textContent = '';
             if (loopGame.selectedAction === lm.action && count === lm.count) {
-                document.getElementById('loopResult').innerHTML = '<span style="color:#00ff88;">✅ PARFAIT ! +100 points</span>';
+                document.getElementById('loopResult').innerHTML = `<span style="color:#00ff88;">✅ PARFAIT ! +100 points</span>`;
                 loopGame.score += 100; document.getElementById('loopScore').textContent = loopGame.score;
                 setTimeout(() => { loopGame.currentLevel++; loadLoopLevel(); }, 2000);
             } else {
-                let fb = '<span style="color:#ff0055;">❌ Pas tout à fait...</span><br>';
-                fb += loopGame.selectedAction !== lm.action ? '<span style="color:white;">Mauvaise action !</span>' : '<span style="color:white;">Il faut exactement ' + lm.count + ' fois !</span>';
+                let fb = `<span style="color:#ff0055;">❌ Pas tout à fait...</span><br>`;
+                fb += loopGame.selectedAction !== lm.action ? `<span style="color:white;">Mauvaise action !</span>` : `<span style="color:white;">Il faut exactement ${lm.count} fois !</span>`;
                 document.getElementById('loopResult').innerHTML = fb;
             }
         }
@@ -433,7 +433,7 @@
             document.getElementById('loopGameWin').style.display = 'block';
             document.getElementById('loopFinalScore').textContent = loopGame.score;
             const rank = loopGame.score >= 600 ? '🏆 MAÎTRE DES BOUCLES 🏆' : loopGame.score >= 500 ? '⭐ EXPERT EN RÉPÉTITIONS ⭐' : '🎖️ CHAMPION DES BOUCLES 🎖️';
-            document.getElementById('loopRank').innerHTML = '<span style="color:#00f5ff;">' + rank + '</span>';
+            document.getElementById('loopRank').innerHTML = `<span style="color:#00f5ff;">${rank}</span>`;
         }
         function restartLoopGame() { loopGame.currentLevel = 0; loopGame.score = 0; loadLoopLevel(); }
         function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
@@ -467,23 +467,23 @@
         function clearFuncCombo() { funcGame.combo = []; updateFuncComboDisplay(); }
 
         async function testFuncCombo() {
-            if (funcGame.combo.length === 0) { document.getElementById('funcResult').innerHTML = '<span style="color:#ff0055;">❌ Ajoute des actions d'abord !</span>'; return; }
+            if (funcGame.combo.length === 0) { document.getElementById('funcResult').innerHTML = `<span style="color:#ff0055;">❌ Ajoute des actions d'abord !</span>`; return; }
             const robot = document.getElementById('funcRobot');
-            document.getElementById('funcResult').innerHTML = '<span style="color:#00f5ff;">🤖 Exécution...</span>';
+            document.getElementById('funcResult').innerHTML = `<span style="color:#00f5ff;">🤖 Exécution...</span>`;
             for (let i = 0; i < funcGame.combo.length; i++) {
                 const a = funcGame.combo[i];
                 if (a === '⬆️') robot.style.transform = 'translateY(-30px)';
-                else if (a === '🔄') robot.style.transform = 'rotate(' + ((i+1)*90) + 'deg)';
+                else if (a === '🔄') robot.style.transform = `rotate(${(i+1)*90}deg)`;
                 else { robot.textContent = a; robot.style.transform = 'scale(1.3)'; }
                 await sleep(500); robot.style.transform = 'scale(1) rotate(0deg)'; robot.textContent = '🤖'; await sleep(300);
             }
             const fm = funcMissionsKids[funcGame.currentLevel];
             if (JSON.stringify(funcGame.combo) === JSON.stringify(fm.combo)) {
-                document.getElementById('funcResult').innerHTML = '<span style="color:#00ff88;">✅ COMBO PARFAIT ! +100 points</span>';
+                document.getElementById('funcResult').innerHTML = `<span style="color:#00ff88;">✅ COMBO PARFAIT ! +100 points</span>`;
                 funcGame.score += 100; document.getElementById('funcScore').textContent = funcGame.score;
                 setTimeout(() => { funcGame.currentLevel++; loadFuncMission(); }, 2000);
             } else {
-                document.getElementById('funcResult').innerHTML = '<span style="color:#ff0055;">❌ Pas le bon combo !</span>';
+                document.getElementById('funcResult').innerHTML = `<span style="color:#ff0055;">❌ Pas le bon combo !</span>`;
             }
         }
         function showFuncWin() {
@@ -491,7 +491,7 @@
             document.getElementById('funcGameWin').style.display = 'block';
             document.getElementById('funcFinalScore').textContent = funcGame.score;
             const rank = funcGame.score >= 500 ? '🏆 MAÎTRE DES COMBOS 🏆' : funcGame.score >= 400 ? '⭐ EXPERT EN COMBOS ⭐' : '🎖️ CRÉATEUR DE COMBOS 🎖️';
-            document.getElementById('funcRank').innerHTML = '<span style="color:#00f5ff;">' + rank + '</span>';
+            document.getElementById('funcRank').innerHTML = `<span style="color:#00f5ff;">${rank}</span>`;
         }
         function restartFuncGame() { funcGame.currentLevel = 0; funcGame.score = 0; funcGame.combo = []; loadFuncMission(); }
 
@@ -530,13 +530,13 @@
         function checkDebugAnswer(index) {
             const level = debugLevelsKids[debugGame.currentLevel];
             if (index === level.errorIndex) {
-                document.getElementById('debugResult').innerHTML = '<span style="color:#00ff88;">✅ BRAVO ! +100 points</span>';
+                document.getElementById('debugResult').innerHTML = `<span style="color:#00ff88;">✅ BRAVO ! +100 points</span>`;
                 debugGame.score += 100; document.getElementById('debugScore').textContent = debugGame.score;
                 document.getElementById('debugSequence').children[index].style.background = 'rgba(0,255,136,0.3)';
                 document.getElementById('debugSequence').children[index].style.borderColor = '#00ff88';
                 setTimeout(() => { debugGame.currentLevel++; loadDebugLevel(); }, 2000);
             } else {
-                document.getElementById('debugResult').innerHTML = '<span style="color:#ff0055;">❌ Pas l'erreur ! Réessaie...</span>';
+                document.getElementById('debugResult').innerHTML = `<span style="color:#ff0055;">❌ Pas l'erreur ! Réessaie...</span>`;
                 setTimeout(() => { document.getElementById('debugResult').innerHTML = ''; }, 1500);
             }
         }
@@ -546,7 +546,7 @@
             document.getElementById('debugGameWin').style.display = 'block';
             document.getElementById('debugFinalScore').textContent = debugGame.score;
             const rank = debugGame.score >= 600 ? '🏆 DÉTECTIVE LÉGENDAIRE 🏆' : debugGame.score >= 500 ? '⭐ CHASSEUR DE BUGS EXPERT ⭐' : '🎖️ DÉTECTIVE DES ERREURS 🎖️';
-            document.getElementById('debugRank').innerHTML = '<span style="color:#00f5ff;">' + rank + '</span>';
+            document.getElementById('debugRank').innerHTML = `<span style="color:#00f5ff;">${rank}</span>`;
         }
         function restartDebugGame() { debugGame.currentLevel = 0; debugGame.score = 0; loadDebugLevel(); }
 
@@ -602,14 +602,14 @@
                     if (!isPlayerTurn) return;
                     playerSequence.push(i); flashCell(cell, colors[i].color);
                     const ci = playerSequence.length - 1;
-                    if (playerSequence[ci] !== simonSequence[ci]) { isPlayerTurn = false; setTimeout(() => alert('❌ ERREUR ! Niveau ' + simonLevel + '\nScore: ' + projectScore), 500); return; }
-                    if (playerSequence.length === simonSequence.length) { isPlayerTurn = false; projectScore += simonLevel * 10; simonLevel++; if (simonLevel > 10) { setTimeout(() => alert('🎉 INCROYABLE ! Score: ' + projectScore), 500); return; } setTimeout(playSeq, 1000); }
+                    if (playerSequence[ci] !== simonSequence[ci]) { isPlayerTurn = false; setTimeout(() => alert(`❌ ERREUR ! Niveau ${simonLevel}\nScore: ${projectScore}`), 500); return; }
+                    if (playerSequence.length === simonSequence.length) { isPlayerTurn = false; projectScore += simonLevel * 10; simonLevel++; if (simonLevel > 10) { setTimeout(() => alert(`🎉 INCROYABLE ! Score: ${projectScore}`), 500); return; } setTimeout(playSeq, 1000); }
                 };
                 grid.appendChild(cell);
             }
             function playSeq() {
                 playerSequence = []; simonSequence.push(Math.floor(Math.random()*6));
-                document.getElementById('projectScore').textContent = 'Niveau ' + simonLevel + ' | Score: ' + projectScore;
+                document.getElementById('projectScore').textContent = `Niveau ${simonLevel} | Score: ${projectScore}`;
                 isPlayerTurn = false; let delay = 0;
                 simonSequence.forEach((ci, i) => { setTimeout(() => { flashCell(grid.children[ci], colors[ci].color); if (i === simonSequence.length-1) setTimeout(() => { isPlayerTurn = true; }, 600); }, delay); delay += 800; });
             }
@@ -619,11 +619,11 @@
 
         function initQuizGame() {
             const questions = [
-                { q: "Que fait une BOUCLE ?", a: ['Répète des actions','Saute en l\'air','Change de couleur'], correct: 'Répète des actions' },
-                { q: "Une VARIABLE c'est quoi ?", a: ['Une boîte pour stocker','Un robot','Un jeu'], correct: 'Une boîte pour stocker' },
-                { q: "Que fait un COMBO ?", a: ['Suite d\'actions','Danse','Vole'], correct: 'Suite d\'actions' },
-                { q: "Pourquoi DEBUGGER ?", a: ['Trouver les erreurs','Faire danser','Peindre'], correct: 'Trouver les erreurs' },
-                { q: "Une SÉQUENCE c'est ?", a: ['Actions dans l\'ordre','Un animal','De la musique'], correct: 'Actions dans l\'ordre' }
+                { q: "Que fait une BOUCLE ?", a: ["Répète des actions","Saute en l'air","Change de couleur"], correct: "Répète des actions" },
+                { q: "Une VARIABLE c'est quoi ?", a: ["Une boîte pour stocker","Un robot","Un jeu"], correct: "Une boîte pour stocker" },
+                { q: "Que fait un COMBO ?", a: ["Suite d'actions","Danse","Vole"], correct: "Suite d'actions" },
+                { q: "Pourquoi DEBUGGER ?", a: ["Trouver les erreurs","Faire danser","Peindre"], correct: "Trouver les erreurs" },
+                { q: "Une SÉQUENCE c'est ?", a: ["Actions dans l'ordre","Un animal","De la musique"], correct: "Actions dans l'ordre" }
             ];
             let currentQ = 0; projectScore = 0; document.getElementById('projectScore').textContent = 0;
             function showQ() {
@@ -631,11 +631,11 @@
                 if (currentQ >= questions.length) {
                     const r = projectScore >= 100 ? '🏆 EXPERT EN CODAGE 🏆' : projectScore >= 60 ? '⭐ BON ÉLÈVE ⭐' : '💪 CONTINUE À APPRENDRE 💪';
                     const d = document.createElement('div'); d.style.cssText = 'color:white;padding:20px;font-size:1.5em;text-align:center;';
-                    d.innerHTML = '🎉 Quiz terminé !<br><br>Score : ' + projectScore + '/100<br><br>' + r; grid.appendChild(d); return;
+                    d.innerHTML = `🎉 Quiz terminé !<br><br>Score : ${projectScore}/100<br><br>${r}`; grid.appendChild(d); return;
                 }
                 const q = questions[currentQ]; const qd = document.createElement('div');
                 qd.style.cssText = 'color:white;padding:20px;font-size:1.3em;font-weight:bold;';
-                qd.textContent = 'Q' + (currentQ+1) + '/' + questions.length + ' : ' + q.q; grid.appendChild(qd);
+                qd.textContent = `Q${currentQ+1}/${questions.length} : ${q.q}`; grid.appendChild(qd);
                 [...q.a].sort(() => Math.random()-0.5).forEach(ans => {
                     const btn = document.createElement('button'); btn.className = 'action-btn';
                     btn.textContent = ans; btn.style.margin = '10px'; btn.style.fontSize = '1.1em';
